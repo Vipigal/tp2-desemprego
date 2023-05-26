@@ -1,17 +1,21 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
-#define vertice int
+using namespace std;
+#include <string>
+
+#define vertice string
 #define INF 0x3f3f3f3f
 
 #include <queue>
 #include <vector>
+#include <unordered_map>
 
 class Grafo {
 private:
   int _numVertices;
   int _numArestas;
-  std::vector<std::vector<int>> _conexao;
+  unordered_map<string, vector<string>> _conexao;
 
 public:
   /**
@@ -27,7 +31,7 @@ public:
    * @param v1 identificador do vértice 1
    * @param v2 identificador do vértice 2
    */
-  void adicionaAresta(vertice v1, vertice v2, int peso);
+  void adicionaAresta(vertice chave, vertice valor);
 
   /**
    * @brief Remove uma aresta do grafo.
@@ -45,7 +49,7 @@ public:
    * @return true
    * @return false
    */
-  bool existeAresta(vertice v1, vertice v2) const;
+  bool existeAresta(vertice v1, vertice v2);
 
   /**
    * @brief Getter para o numero total de vértices do grafo
@@ -60,27 +64,12 @@ public:
   int getNumArestas() const;
 
   /**
-   * @brief Getter para o peso de uma aresta entre v1 e v2.
-   *
-   * @param v1 identificador do vértice 1
-   * @param v2 identificador do vértice 2
-   * @return int
-   */
-  int getPesoAresta(vertice v1, vertice v2) const;
-
-  /**
-   * @brief Imprime o grafo por meio da lista de adjacencia de cada vertice
+   * @brief Imprime todas as conexoes vertice-aresta do grafo.
    *
    */
   void imprimir() const;
 
-  /**
-   * @brief Imprime os pesos entre cada aresta do grafo.
-   *
-   */
-  void imprimirPesos() const;
-
-  int dijkstra(vertice origem, vertice destino);
+	int greedyPair();
 
 };
 
