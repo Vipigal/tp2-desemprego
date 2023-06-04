@@ -1,7 +1,6 @@
 #include "graph.hpp"
 #include <iostream>
 
-
 using namespace std;
 
 Grafo::Grafo(int numVertices){
@@ -54,7 +53,7 @@ void Grafo::imprimir() const{
 int Grafo::greedyPair(){
 	int matches{0};
 	std::unordered_set<std::string> cargos_empregados;
-
+	
 	for(const auto &usuario : _conexao){
 		for(const auto &cargo : usuario.second){
 			if(cargos_empregados.count(cargo) == 0 ){
@@ -64,19 +63,21 @@ int Grafo::greedyPair(){
 			}
 		}
 	}
-	
+
 	return matches;
+	
 }
 
-bool Grafo::encontrarCaminhoAumentante(const std::string& u, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par){
-	if (visitado.count(u) != 0)
+
+bool Grafo::encontrarCaminhoAumentante(const std::string& usuario, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par){
+	if (visitado.count(usuario) != 0)
 		return false;
 	
-	visitado.insert(u);
+	visitado.insert(usuario);
 
-	for (const auto& v : _conexao[u]){
-		if (par[v].empty() || encontrarCaminhoAumentante(par[v], visitado, par)){
-			par[v] = u;
+	for (const auto& cargo : _conexao[usuario]){
+		if (par[cargo].empty() || encontrarCaminhoAumentante(par[cargo], visitado, par)){
+			par[cargo] = usuario;
 			return true;
 		}
 	}

@@ -75,7 +75,7 @@ public:
 
 	int exactPair();
 
-	bool encontrarCaminhoAumentante(const std::string& u, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par);
+	bool encontrarCaminhoAumentante(const std::string& usuario, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par);
 
 };
 
