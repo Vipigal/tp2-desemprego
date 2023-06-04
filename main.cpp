@@ -16,10 +16,10 @@ int main(int argc, char const *argv[]) {
 			tb_usuario_emprego->adicionaAresta(usuario, cargo);
 		}
 
-		cout<<"Guloso: "<<tb_usuario_emprego->greedyPair();
-		// cout<<"Exato: "<<tb_usuario_emprego->exactPair();
+		cout<<"Guloso: "<<tb_usuario_emprego->greedyPair()<<endl;
+		cout<<"Exato: "<<tb_usuario_emprego->exactPair();
 
-		tb_usuario_emprego->imprimir();
+		// tb_usuario_emprego->imprimir();
 
     return 0;
 }

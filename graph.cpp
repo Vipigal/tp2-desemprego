@@ -1,6 +1,7 @@
 #include "graph.hpp"
 #include <iostream>
 
+
 using namespace std;
 
 Grafo::Grafo(int numVertices){
@@ -41,9 +42,9 @@ int Grafo::getNumArestas() const{
 
 
 void Grafo::imprimir() const{
-		for (auto v : _conexao){
+		for (const auto &v : _conexao){
 			cout<<v.first<<" ";
-			for (auto i : v.second){
+			for (const auto &i : v.second){
 				cout<<i<<" ";
 			}
 			cout<<endl;
@@ -51,5 +52,49 @@ void Grafo::imprimir() const{
 }
 
 int Grafo::greedyPair(){
+	int matches{0};
+	std::unordered_set<std::string> cargos_empregados;
+
+	for(const auto &usuario : _conexao){
+		for(const auto &cargo : usuario.second){
+			if(cargos_empregados.count(cargo) == 0 ){
+				matches++;
+				cargos_empregados.insert(cargo);
+				break;
+			}
+		}
+	}
+	
+	return matches;
+}
+
+bool Grafo::encontrarCaminhoAumentante(const std::string& u, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par){
+	if (visitado.count(u) != 0)
+		return false;
+	
+	visitado.insert(u);
+
+	for (const auto& v : _conexao[u]){
+		if (par[v].empty() || encontrarCaminhoAumentante(par[v], visitado, par)){
+			par[v] = u;
+			return true;
+		}
+	}
+
+	return false;
+}
+
+int Grafo::exactPair(){
+	std::unordered_map<std::string, std::string> par;
+  int matches = 0;
+
+	for (const auto& usuario : _conexao) {
+		std::unordered_set<std::string> visitado;
+		if (encontrarCaminhoAumentante(usuario.first, visitado, par))
+			matches++;
+	}
+	
+	return matches;
 
 }
+

@@ -10,6 +10,8 @@ using namespace std;
 #include <queue>
 #include <vector>
 #include <unordered_map>
+#include <set>
+#include <unordered_set>
 
 class Grafo {
 private:
@@ -70,6 +72,10 @@ public:
   void imprimir() const;
 
 	int greedyPair();
+
+	int exactPair();
+
+	bool encontrarCaminhoAumentante(const std::string& u, std::unordered_set<std::string>& visitado, std::unordered_map<std::string, std::string>& par);
 
 };
 
